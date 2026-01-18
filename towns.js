@@ -34,15 +34,15 @@ function addTown() {
     let townName = $('#townNameForAdd').val();
     $('#townNameForAdd').val('');
     if (isEmptyTown(townName)) {
-        $('#result').text('Town name cannot be empty.');
+		showMessage('Town name cannot be empty.');
         return;
     }
     if (townExists(townName)) {
-        $('#result').text('Town "' + townName + '" already exists.');
+		showMessage('Town "' + townName + '" already exists.');
         return;
     }
     $('#towns').append($('<option>').text(townName));
-    $('#result').text(townName + " added.");
+	showMessage(townName + " added.");
 }
 
 function showMessage(msg) { 
