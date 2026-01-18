@@ -19,19 +19,28 @@ function deleteTown() {
 		showMessage(townName + " not found.");
 }
 
-function addTown() {
-	let townName = $('#townNameForAdd').val();
-	$('#townNameForAdd').val('');
-	$('#towns').append($('<option>').text(townName));
-	$('#result').text(townName + " added.");
 
-	showMessage(townName + " added.");
+function townExists(townName) {
+	return $('#towns option').filter(function () {
+		return $(this).text() === townName;
+	}).length > 0;
 }
 
-function showMessage(msg) { 
-	$('#result').text(msg).css("display", "block"); 
+function isEmptyTown(townName) {
+    return !townName || townName.trim() === "";
+}
 
-	setTimeout(function () {
-		 $('#result').hide('blind', {}, 500); 
-		}, 3000); 
+function addTown() {
+    let townName = $('#townNameForAdd').val();
+    $('#townNameForAdd').val('');
+    if (isEmptyTown(townName)) {
+        $('#result').text('Town name cannot be empty.');
+        return;
+    }
+    if (townExists(townName)) {
+        $('#result').text('Town "' + townName + '" already exists.');
+        return;
+    }
+    $('#towns').append($('<option>').text(townName));
+    $('#result').text(townName + " added.");
 }
