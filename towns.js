@@ -19,9 +19,25 @@ function deleteTown() {
 		$('#result').text(townName + " not found.");
 }
 
+
+function townExists(townName) {
+	let exists = false;
+	$('#towns option').each(function() {
+		if ($(this).text() === townName) {
+			exists = true;
+			return false; // break loop
+		}
+	});
+	return exists;
+}
+
 function addTown() {
 	let townName = $('#townNameForAdd').val();
 	$('#townNameForAdd').val('');
+	if (townExists(townName)) {
+		$('#result').text('Town "' + townName + '" already exists.');
+		return;
+	}
 	$('#towns').append($('<option>').text(townName));
 	$('#result').text(townName + " added.");
 }
