@@ -21,14 +21,9 @@ function deleteTown() {
 
 
 function townExists(townName) {
-	let exists = false;
-	$('#towns option').each(function() {
-		if ($(this).text() === townName) {
-			exists = true;
-			return false;
-		}
-	});
-	return exists;
+	return $('#towns option').filter(function () {
+		return $(this).text() === townName;
+	}).length > 0;
 }
 
 function isEmptyTown(townName) {
