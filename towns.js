@@ -14,9 +14,9 @@ function deleteTown() {
 		}
 	}
 	if (removed)
-		$('#result').text(townName + " deleted.");
+		showMessage(townName + " deleted.");
 	else
-		$('#result').text(townName + " not found.");
+		showMessage(townName + " not found.");
 }
 
 function addTown() {
@@ -24,4 +24,14 @@ function addTown() {
 	$('#townNameForAdd').val('');
 	$('#towns').append($('<option>').text(townName));
 	$('#result').text(townName + " added.");
+
+	showMessage(townName + " added.");
+}
+
+function showMessage(msg) { 
+	$('#result').text(msg).css("display", "block"); 
+
+	setTimeout(function () {
+		 $('#result').hide('blind', {}, 500); 
+		}, 3000); 
 }
