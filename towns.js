@@ -25,19 +25,27 @@ function townExists(townName) {
 	$('#towns option').each(function() {
 		if ($(this).text() === townName) {
 			exists = true;
-			return false; // break loop
+			return false;
 		}
 	});
 	return exists;
 }
 
+function isEmptyTown(townName) {
+    return !townName || townName.trim() === "";
+}
+
 function addTown() {
-	let townName = $('#townNameForAdd').val();
-	$('#townNameForAdd').val('');
-	if (townExists(townName)) {
-		$('#result').text('Town "' + townName + '" already exists.');
-		return;
-	}
-	$('#towns').append($('<option>').text(townName));
-	$('#result').text(townName + " added.");
+    let townName = $('#townNameForAdd').val();
+    $('#townNameForAdd').val('');
+    if (isEmptyTown(townName)) {
+        $('#result').text('Town name cannot be empty.');
+        return;
+    }
+    if (townExists(townName)) {
+        $('#result').text('Town "' + townName + '" already exists.');
+        return;
+    }
+    $('#towns').append($('<option>').text(townName));
+    $('#result').text(townName + " added.");
 }
